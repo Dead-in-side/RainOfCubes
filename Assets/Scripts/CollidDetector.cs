@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollidDetector : MonoBehaviour
 {
-    [SerializeField] private Pool _pool;
+    [SerializeField] private Pool<Cube> _pool;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,7 +16,7 @@ public class CollidDetector : MonoBehaviour
 
             cube.ChangeColor();
 
-            _pool.TakeCube(cube);
+            _pool.TakeObject(cube);
         }
     }
 }
