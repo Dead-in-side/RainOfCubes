@@ -34,11 +34,10 @@ public class BombSpawner : Spawner<Bomb>
         {
             if (_position != transform.position)
             {
-                Bomb spawnedObject = _Pool.GetObject();
+                Bomb spawnedObject = Pool.GetObject();
                 SpawnCounter++;
                 spawnedObject.Init(_position);
                 _position = transform.position;
-                _Pool.TakeObject(spawnedObject);
             }
 
             yield return null;

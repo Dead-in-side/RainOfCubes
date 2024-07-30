@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -37,6 +36,6 @@ public class GameStatistics : MonoBehaviour
 
     private void ChangeText()
     {
-        _text.text = $"Колличество бомб: {_bombSpawner.SpawnCounter}, количество кубов - {_cubeSpawner.SpawnCounter}, активных объектов на сцене: {_counterOfActiveObjects}.";
+        _text.text = $"Колличество бомб: {_bombSpawner.SpawnCounter}, количество кубов: {_cubeSpawner.SpawnCounter}, активных объектов на сцене: {_counterOfActiveObjects}.";
     }
 }

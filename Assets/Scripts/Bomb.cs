@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections; 
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +9,17 @@ public class Bomb : MonoBehaviour, IRecreated
     private const string ColorShader = "_Color";
 
     private Renderer _renderer;
-    private Rigidbody _rigidbody;
     private Color _startColor;
     private float _explosionForce = 400;
     private float _explosionRadius = 10;
+    private float _minDelay = 2;
+    private float _maxDelay = 5;
+
+
+    public event Action<GameObject> LifetimeIsEnd;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
         _renderer = GetComponent<Renderer>();
         _startColor = _renderer.material.color;
     }
@@ -27,11 +31,8 @@ public class Bomb : MonoBehaviour, IRecreated
         transform.position = position;
 
         gameObject.SetActive(true);
-    }
 
-    public void StartCountdown(float delay)
-    {
-        StartCoroutine(ExplodeCoroutine(delay));
+        StartCoroutine(ExplodeCoroutine(UnityEngine.Random.Range(_minDelay, _maxDelay)));
     }
 
     private IEnumerator ExplodeCoroutine(float delay)
@@ -52,6 +53,8 @@ public class Bomb : MonoBehaviour, IRecreated
         }
 
         Explode();
+
+        LifetimeIsEnd?.Invoke(gameObject);
     }
 
     private void Explode()

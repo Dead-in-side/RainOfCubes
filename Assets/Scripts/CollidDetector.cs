@@ -2,19 +2,11 @@ using UnityEngine;
 
 public class CollidDetector : MonoBehaviour
 {
-    [SerializeField] private Pool<Cube> _pool;
-
     private void OnCollisionEnter(Collision collision)
     {
-        Cube cube = collision.collider.GetComponent<Cube>();
-
-        if (cube != null && !cube.IsCollide)
+        if (collision.gameObject.TryGetComponent(out Cube cube) && !cube.IsCollide)
         {
             cube.Collide();
-
-            cube.ChangeColor();
-
-            _pool.TakeObject(cube);
         }
     }
 }

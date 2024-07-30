@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Spawner<T> : MonoBehaviour where T: MonoBehaviour, IRecreated
 {
-    [SerializeField] protected Pool<T> _Pool;
-    [SerializeField][Range(0,5)] private float _spawnDelay = 5;
+    [SerializeField] protected Pool<T> Pool;
+    [SerializeField] private float _spawnDelay = 5;
 
     public int SpawnCounter { get; protected set; }
 
@@ -21,7 +21,7 @@ public class Spawner<T> : MonoBehaviour where T: MonoBehaviour, IRecreated
 
         while (isWork)
         {
-            T spawnedObject = _Pool.GetObject();
+            T spawnedObject = Pool.GetObject();
             SpawnCounter++;
             spawnedObject.Init(GetPosition());
             yield return delay;

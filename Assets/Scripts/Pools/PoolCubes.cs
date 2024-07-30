@@ -1,19 +1,22 @@
 using System;
-using System.Collections;
 using UnityEngine;
 public class PoolCubes : Pool<Cube>
 {
     public event Action<Vector3> CubeDisabled;
 
-    protected override IEnumerator WaitDesableObject(Cube spawnedObject)
+    public override void TakeObject(GameObject gameObject)
     {
-        yield return new WaitForSecondsRealtime(UnityEngine.Random.Range(MinDelay, MaxDelay));
+        Cube spawnedObject = gameObject.GetComponent<Cube>();
 
         CubeDisabled?.Invoke(spawnedObject.transform.position);
+
+        spawnedObject.LifetimeIsEnd -= TakeObject;
 
         spawnedObject.gameObject.SetActive(false);
         CounterOfActiveObject--;
 
-        _ObjectQueue.Enqueue(spawnedObject);
+        ObjectQueue.Enqueue(spawnedObject);
+
+        Debug.Log(CounterOfActiveObject);
     }
 }
