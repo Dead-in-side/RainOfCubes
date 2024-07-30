@@ -29,15 +29,16 @@ public class BombSpawner : Spawner<Bomb>
     public override IEnumerator SpawnObject()
     {
         bool isWork = true;
+
         while (isWork)
         {
             if (_position != transform.position)
             {
-                Bomb spawnedObject = _pool.GetObject();
+                Bomb spawnedObject = _Pool.GetObject();
                 SpawnCounter++;
                 spawnedObject.Init(_position);
                 _position = transform.position;
-                _pool.TakeObject(spawnedObject);
+                _Pool.TakeObject(spawnedObject);
             }
 
             yield return null;

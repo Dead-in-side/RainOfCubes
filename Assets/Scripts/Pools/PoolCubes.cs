@@ -5,14 +5,15 @@ public class PoolCubes : Pool<Cube>
 {
     public event Action<Vector3> CubeDisabled;
 
-    public override IEnumerator WaitDesableObject(Cube spawnedObject)
+    protected override IEnumerator WaitDesableObject(Cube spawnedObject)
     {
         yield return new WaitForSecondsRealtime(UnityEngine.Random.Range(MinDelay, MaxDelay));
 
         CubeDisabled?.Invoke(spawnedObject.transform.position);
 
         spawnedObject.gameObject.SetActive(false);
+        CounterOfActiveObject--;
 
-        _objectQueue.Enqueue(spawnedObject);
+        _ObjectQueue.Enqueue(spawnedObject);
     }
 }

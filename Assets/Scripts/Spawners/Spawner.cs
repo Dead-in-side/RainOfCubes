@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class Spawner<T> : MonoBehaviour where T: MonoBehaviour, IRecreated
 {
-    [SerializeField] protected Pool<T> _pool;
+    [SerializeField] protected Pool<T> _Pool;
     [SerializeField][Range(0,5)] private float _spawnDelay = 5;
-
-    private Coroutine _coroutine;
 
     public int SpawnCounter { get; protected set; }
 
     private void Start()
     {
-        _coroutine = StartCoroutine(SpawnObject());
+        StartCoroutine(SpawnObject());
         SpawnCounter = 0;
     }
 
@@ -23,12 +21,13 @@ public class Spawner<T> : MonoBehaviour where T: MonoBehaviour, IRecreated
 
         while (isWork)
         {
-            T spawnedObject = _pool.GetObject();
+            T spawnedObject = _Pool.GetObject();
             SpawnCounter++;
             spawnedObject.Init(GetPosition());
             yield return delay;
         }
     }
+
     private Vector3 GetPosition()
     {
         float position = 20;

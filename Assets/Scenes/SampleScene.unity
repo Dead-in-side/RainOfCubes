@@ -773,6 +773,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bombSpawner: {fileID: 2096448970}
   _cubeSpawner: {fileID: 2096448968}
+  _poolBombs: {fileID: 2096448969}
+  _poolCubes: {fileID: 2096448967}
 --- !u!114 &1518472222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a8561d2ed57e04695ec438ba87930e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pool: {fileID: 2096448967}
+  _Pool: {fileID: 2096448967}
   _spawnDelay: 0
 --- !u!114 &2096448969
 MonoBehaviour:
@@ -1077,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ce80cbf835ffa488a5b1715a0e79c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pool: {fileID: 2096448969}
+  _Pool: {fileID: 2096448969}
   _spawnDelay: 5
   _cubesPool: {fileID: 2096448967}
 --- !u!1660057539 &9223372036854775807

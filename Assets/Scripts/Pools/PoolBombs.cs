@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PoolBombs : Pool<Bomb>
 {
-    public override IEnumerator WaitDesableObject(Bomb spawnedObject)
+    protected override IEnumerator WaitDesableObject(Bomb spawnedObject)
     {
         float delay = Random.Range(MinDelay, MaxDelay);
 
@@ -12,7 +12,8 @@ public class PoolBombs : Pool<Bomb>
         yield return new WaitForSecondsRealtime(delay);
 
         spawnedObject.gameObject.SetActive(false);
+        CounterOfActiveObject--;
 
-        _objectQueue.Enqueue(spawnedObject);
+        _ObjectQueue.Enqueue(spawnedObject);
     }
 }

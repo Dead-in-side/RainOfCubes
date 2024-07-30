@@ -3,27 +3,36 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class GameStatistics: MonoBehaviour
+public class GameStatistics : MonoBehaviour
 {
     [SerializeField] private BombSpawner _bombSpawner;
     [SerializeField] private CubeSpawner _cubeSpawner;
+    [SerializeField] private PoolBombs _poolBombs;
+    [SerializeField] private PoolCubes _poolCubes;
 
     private TextMeshProUGUI _text;
     private int _counterOfActiveObjects;
+    private int _sumOfCounters;
+    private int _tempSumOfCounters;
 
     private void Awake()
     {
         _text = GetComponent<TextMeshProUGUI>();
+        _tempSumOfCounters = 0;
     }
 
     private void Update()
     {
-        Cube[] cubeActive = FindObjectsOfType<Cube>().Where(cube=>cube.gameObject.activeInHierarchy).ToArray();
-        Bomb[] bombActive = FindObjectsOfType<Bomb>().Where(bomb => bomb.gameObject.activeInHierarchy).ToArray();
+        _counterOfActiveObjects = _poolBombs.CounterOfActiveObject + _poolCubes.CounterOfActiveObject;
 
-        _counterOfActiveObjects = cubeActive.Length + bombActive.Length;
+        _sumOfCounters = _counterOfActiveObjects + _bombSpawner.SpawnCounter + _cubeSpawner.SpawnCounter;
 
-        ChangeText();
+        if (_tempSumOfCounters != _sumOfCounters)
+        {
+            ChangeText();
+
+            _tempSumOfCounters = _sumOfCounters;
+        }
     }
 
     private void ChangeText()
